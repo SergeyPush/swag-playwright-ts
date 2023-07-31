@@ -23,7 +23,7 @@ test.describe("Test checkout overview page", () => {
     const pricesArray = await auth.checkoutOverview.getCartItemsPricesTexts();
     const calculatedSubtotal = pricesArray.reduce((acc, item) => acc + item, 0);
     const calculatedTax = Number((calculatedSubtotal * 0.08).toFixed(2));
-    const calculatedTotal = calculatedSubtotal + calculatedTax;
+    const calculatedTotal = calculatedSubtotal + calculatedTax + 1;
 
     expect(await auth.checkoutOverview.getSubtotalPriceNumber()).toEqual(
       calculatedSubtotal
@@ -36,7 +36,7 @@ test.describe("Test checkout overview page", () => {
 
   test("Click on Cancel button", async ({ auth }) => {
     await auth.checkoutOverview.clickCanceButton();
-    expect(await auth.getTitle()).toBe("Products");
+    expect(await auth.getTitle()).toBe("Products1");
   });
 
   test("Click Finish button", async ({ auth }) => {
