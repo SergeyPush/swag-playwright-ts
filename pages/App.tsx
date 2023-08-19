@@ -40,6 +40,7 @@ class App {
     expect(this.page).toHaveTitle("Swag Labs");
   }
 
+  // FIXME move this to abstract page
   async getTitle() {
     return this.titleLabel.innerText();
   }

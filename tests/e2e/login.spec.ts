@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 import { test } from "../config/test.config";
 
 test.describe("Test login page", () => {
+  const DEFAULT_PASSWORD = "secret_sauce";
   const cases = [
     {
       name: "Incorrect credentials",
@@ -34,7 +35,17 @@ test.describe("Test login page", () => {
   }
 
   test("User can login app successfully", async ({ app }) => {
-    await app.loginPage.login("standard_user", "secret_sauce");
+    await app.loginPage.login("standard_user", DEFAULT_PASSWORD);
     expect(await app.getTitle()).toBe("Products");
   });
+
+  test("Login as locked user", async ({ app }) => {
+    await app.loginPage.login("locked_out_user", DEFAULT_PASSWORD);
+    expect(await app.loginPage.getErrorMessageText()).toBe(
+      "Epic sadface: Sorry, this user has been locked out."
+    );
+  });
+
+  // TODO: Add test for Problem user
+  // TODO: Add test for Performance glitch user
 });

@@ -1,6 +1,5 @@
 import { test as base } from "@playwright/test";
 import App from "../../pages/App";
-import LoginPage from "../../pages/LoginPage";
 
 type MyFixtures = {
   app: App;
@@ -18,4 +17,6 @@ export const test = base.extend<MyFixtures>({
     await app.loginPage.login("standard_user", "secret_sauce");
     await use(app);
   },
+
+  // TODO Create fixture to login via saved browser details
 });
